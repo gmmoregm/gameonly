@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Basket Toss Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body { 
+    background: linear-gradient(120deg, #8e44ad, #c39bd3); 
+    color:white; 
+    font-family:Arial, sans-serif; 
+    text-align:center; 
+    margin:0; 
+}
+canvas { 
+    background:#fff; 
+    display:block; 
+    margin:20px auto; 
+    border-radius:10px; 
+}
+button { 
+    padding:10px 20px; 
+    margin:10px; 
+    font-size:16px; 
+    cursor:pointer; 
+}
+h1,h2 { margin:10px; }
+.leaderboard { max-width:300px; margin:20px auto; text-align:left; }
+.leaderboard li { padding:5px 0; }
+</style>
+</head>
+<body>
+
+<h1>🏀 Basket Toss</h1>
+<h2>Score: <span id="score">0</span></h2>
+<canvas id="gameCanvas" width="400" height="400"></canvas>
+<br>
+<input type="text" id="playerName" placeholder="Enter name" />
+<button id="saveScore">Save Score</button>
+
+<h2>Leaderboard</h2>
+<ol id="leaderboard" class="leaderboard"></ol>
+<br>
+<a href="index.html" style="color:yellow;">⬅ Back to Game Hub</a>
+
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+let score = 0;
+const ballRadius = 15;
+let ball = {x: Math.random()*(canvas.width-30)+15, y: 50, dy: 2};
+let basket = {x: canvas.width/2-50, y: canvas.height-30, width:100, height:20};
+
+function loop(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    // Draw basket
+    ctx.fillStyle="brown";
+    ctx.fillRect(basket.x, basket.y, basket.width, basket.height);
+    // Draw ball
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ballRadius, 0, Math.PI*2);
+    ctx.fillStyle="red";
+    ctx.fill();
+    ctx.closePath();
+    // Move ball
+    ball.y += ball.dy;
+    // Check collision with basket
+    if(ball.y+ballRadius >= basket.y && ball.x > basket.x && ball.x < basket.x+basket.width){
+        score++;
+        document.getElementById("score").innerText = score;
+        resetBall();
+    }
+    // Missed ball
+    if(ball.y > canvas.height){
+        resetBall();
+    }
+    requestAnimationFrame(loop);
+}
+
+function resetBall(){
+    ball.x = Math.random()*(canvas.width-30)+15;
+    ball.y = 50;
+}
+
+loop();
+
+// Save score to leaderboard
+const saveButton = document.getElementById("saveScore");
+saveButton.onclick = function(){
+    let name = document.getElementById("playerName").value || "Player";
+    let leaderboard = JSON.parse(localStorage.getItem("basketLeaderboard") || "[]");
+    leaderboard.push({name:name, score:score});
+    leaderboard.sort((a,b)=>b.score-a.score);
+    if(leaderboard.length>5) leaderboard = leaderboard.slice(0,5);
+    localStorage.setItem("basketLeaderboard", JSON.stringify(leaderboard));
+    renderLeaderboard();
+};
+
+function renderLeaderboard(){
+    const list = document.getElementById("leaderboard");
+    list.innerHTML="";
+    let leaderboard = JSON.parse(localStorage.getItem("basketLeaderboard") || "[]");
+    leaderboard.forEach(entry=>{
+        let li = document.createElement("li");
+        li.innerText = `${entry.name} - ${entry.score}`;
+        list.appendChild(li);
+    });
+}
+renderLeaderboard();
+</script>
+
+</body>
+</html>
