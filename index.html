@@ -1,6 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Multiplayer Game Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* General Styles */
+body {
+    margin:0;
+    font-family:Arial, sans-serif;
+    background: linear-gradient(120deg,#8e44ad,#c39bd3);
+    color:white;
+}
+header {
+    padding:30px 0;
+    font-size:36px;
+    font-weight:bold;
+    text-align:center;
+    text-shadow:2px 2px 5px rgba(0,0,0,0.4);
+}
+.games {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:50px auto;
+    max-width:1200px;
+    gap:20px;
+}
+.card {
+    background: rgba(255,255,255,0.1);
+    border-radius:15px;
+    width:300px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s, background 0.3s;
+}
+.card:hover {
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.2);
+}
+.card h3 { margin-bottom:15px; font-size:24px; }
+.card button {
+    padding:12px 25px;
+    font-size:16px;
+    background:#f1c40f;
+    color:#111;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    transition: background 0.3s;
+}
+.card button:hover { background:#f39c12; }
+
+/* Modal iframe container */
+#gameModal {
+    display:none;
+    position:fixed;
+    top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.9);
+    z-index:1000;
+    justify-content:center;
+    align-items:center;
+}
+#gameModal iframe {
+    width:90%;
+    height:90%;
+    border:none;
+    border-radius:10px;
+}
+#closeModal {
+    position:absolute;
+    top:20px; right:30px;
+    font-size:28px;
+    color:white;
+    cursor:pointer;
+}
+
+/* Responsive */
+@media(max-width:600px){
+    .card { width:90%; }
+    header { font-size:28px; }
+}
+</style>
+</head>
+<body>
+
+<header>🎮 Multiplayer Game Hub</header>
+
 <div class="games">
     <div class="card">
-        <h3>Basket Toss</h3>
-        <a href="basket_toss.html">Play Now</a>
+        <h3>Slither.io</h3>
+        <button onclick="openGame('https://slither.io/')">Play Now</button>
+    </div>
+    <div class="card">
+        <h3>Krunker.io</h3>
+        <button onclick="openGame('https://krunker.io/')">Play Now</button>
+    </div>
+    <div class="card">
+        <h3>Paper.io 2</h3>
+        <button onclick="openGame('https://paper-io.com/paper-io-2')">Play Now</button>
+    </div>
+    <div class="card">
+        <h3>Hole.io</h3>
+        <button onclick="openGame('https://hole-io.com/')">Play Now</button>
     </div>
 </div>
+
+<!-- Modal for embedded game -->
+<div id="gameModal" onclick="closeGame()">
+    <span id="closeModal">&times;</span>
+    <iframe id="gameFrame" src=""></iframe>
+</div>
+
+<script>
+const modal = document.getElementById("gameModal");
+const iframe = document.getElementById("gameFrame");
+
+function openGame(url){
+    iframe.src = url;
+    modal.style.display = "flex";
+}
+
+function closeGame(){
+    iframe.src = "";
+    modal.style.display = "none";
+}
+
+// Prevent iframe click from closing modal
+iframe.addEventListener('click', e=>e.stopPropagation());
+</script>
+
+<footer>© 2026 Multiplayer Game Hub. All rights reserved.</footer>
+
+</body>
+</html>
