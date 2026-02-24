@@ -1,21 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Game Site</title>
+    <meta charset="UTF-8">
+    <title>Game Hub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             text-align: center;
             font-family: Arial, sans-serif;
-            background-color: black;  /* ეს დააწესებს შავ ფონს */
-            color: white;             /* ტექსტი თეთრი იქნება */
+            background-color: black;  /* Black background */
+            color: white;             /* White text */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #222;
+            padding: 20px;
+            font-size: 28px;
+        }
+        .games {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .card {
+            background-color: #333;
+            margin: 15px;
+            padding: 20px;
+            width: 220px;
+            border-radius: 10px;
+        }
+        .card h3 {
+            margin: 0 0 10px 0;
+        }
+        a {
+            color: yellow;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-<h1>🎮 ჩემი თამაშების საიტი</h1>
-<p>საიტი მუშაობს წარმატებით!</p>
+<header>🎮 Game Hub</header>
+
+<h2>Select a Game</h2>
+
+<div class="games">
+    <div class="card">
+        <h3>Click Game</h3>
+        <a href="click.html">Play Now</a>
+    </div>
+
+    <div class="card">
+        <h3>Snake Game</h3>
+        <a href="snake.html">Play Now</a>
+    </div>
+</div>
 
 </body>
 </html>
