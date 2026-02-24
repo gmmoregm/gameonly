@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Multiplayer Game Hub</title>
+<title>Arcade Game Hub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body {
@@ -30,10 +30,9 @@ header {
     background: rgba(255,255,255,0.1);
     border-radius:15px;
     width:250px;
-    padding:0;
+    overflow:hidden;
     text-align:center;
     box-shadow:0 8px 20px rgba(0,0,0,0.3);
-    overflow:hidden;
     transition: transform 0.3s, background 0.3s;
 }
 .card:hover {
@@ -45,7 +44,7 @@ header {
     display:block;
 }
 .card h3 {
-    margin:15px 0;
+    margin:10px 0;
     font-size:20px;
 }
 .card button {
@@ -62,12 +61,13 @@ header {
 }
 .card button:hover { background:#f39c12; }
 
-/* Modal iframe container */
+/* Modal iframe */
 #gameModal {
     display:none;
     position:fixed;
-    top:0; left:0; width:100%; height:100%;
-    background:rgba(0,0,0,0.9);
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.95);
     z-index:1000;
     justify-content:center;
     align-items:center;
@@ -95,7 +95,7 @@ header {
 </head>
 <body>
 
-<header>🎮 Multiplayer Game Hub</header>
+<header>🎮 Arcade Game Hub</header>
 
 <div class="games">
     <div class="card">
@@ -120,7 +120,7 @@ header {
     </div>
 </div>
 
-<!-- Modal for embedded game -->
+<!-- Modal for embedded games -->
 <div id="gameModal" onclick="closeGame()">
     <span id="closeModal">&times;</span>
     <iframe id="gameFrame" src=""></iframe>
@@ -144,7 +144,9 @@ function closeGame(){
 iframe.addEventListener('click', e=>e.stopPropagation());
 </script>
 
-<footer>© 2026 Multiplayer Game Hub. All rights reserved.</footer>
+<footer style="text-align:center; margin-top:50px; opacity:0.7; padding:20px;">
+© 2026 Arcade Game Hub. All rights reserved.
+</footer>
 
 </body>
 </html>
