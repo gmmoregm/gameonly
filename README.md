@@ -1,1 +1,1 @@
-# my-game-site
+# mygame
