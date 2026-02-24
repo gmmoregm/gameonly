@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Click Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body { text-align:center; font-family:Arial, sans-serif; background-color:black; color:white; }
+    button { padding:20px; font-size:20px; cursor:pointer; margin-top:20px; }
+</style>
+</head>
+<body>
+
+<h1>Click Game</h1>
+<h2>Score: <span id="score">0</span></h2>
+<button onclick="addScore()">Click Me!</button>
+
+<script>
+let score = 0;
+function addScore(){
+    score++;
+    document.getElementById("score").innerText = score;
+}
+</script>
+
+<br><br>
+<a href="index.html" style="color:yellow;">⬅ Back to Game Hub</a>
+
+</body>
+</html>
